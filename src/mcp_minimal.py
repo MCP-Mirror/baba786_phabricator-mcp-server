@@ -33,7 +33,7 @@ class MinimalMCPServer:
                     name="get-task",
                     description="Get details of a Phabricator task",
                     arguments=[
-                        types.ToolArgument(
+                        types.Argument(
                             name="task_id",
                             description="Task ID (without 'T' prefix)",
                             required=True
