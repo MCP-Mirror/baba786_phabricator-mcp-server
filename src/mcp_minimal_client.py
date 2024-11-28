@@ -1,32 +1,29 @@
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
 import asyncio
-import os
+from mcp.client import ClientSession, stdio_client
 
 async def main():
-    # Create server parameters
-    server_params = StdioServerParameters(
-        command="/opt/homebrew/bin/python3.11",
-        args=["mcp_minimal.py"],
-        env={"PYTHONPATH": os.getenv("PYTHONPATH", "")}
-    )
-
+    server_params = {
+        "capabilities": ["list_tools", "invoke_tool"]
+    }
+    
     async with stdio_client(server_params) as (read, write):
         async with ClientSession(read, write) as session:
-            # Initialize the connection
-            await session.initialize()
-
-            # List available tools
-            tools = await session.list_tools()
-            print("\nAvailable tools:")
-            for tool in tools:
-                print(f"- {tool.name}: {tool.description}")
-
-            # Get a task
-            task_id = input("\nEnter task ID (without 'T' prefix): ")
-            result = await session.call_tool("get-task", {"task_id": task_id})
-            print("\nTask details:")
-            print(result[0].text)
+            try:
+                # List available tools
+                tools = await session.list_tools()
+                print("Available tools:")
+                for tool in tools:
+                    print(f"- {tool['name']}: {tool['description']}")
+                
+                # Example: Get task details
+                result = await session.invoke_tool(
+                    "get-task",
+                    {"task_id": "T123"}
+                )
+                print("\nGet task result:", result)
+                
+            except Exception as e:
+                print(f"Error: {e}")
 
 if __name__ == "__main__":
     asyncio.run(main())
