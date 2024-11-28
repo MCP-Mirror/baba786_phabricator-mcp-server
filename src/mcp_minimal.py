@@ -32,16 +32,16 @@ class MinimalMCPServer:
                 types.Tool(
                     name="get-task",
                     description="Get details of a Phabricator task",
-                    inputSchema=types.ObjectSchema(
-                        type="object",
-                        properties={
-                            "task_id": types.StringSchema(
-                                type="string",
-                                description="Task ID (without 'T' prefix)"
-                            )
+                    schema={
+                        "type": "object",
+                        "properties": {
+                            "task_id": {
+                                "type": "string",
+                                "description": "Task ID (without 'T' prefix)"
+                            }
                         },
-                        required=["task_id"]
-                    )
+                        "required": ["task_id"]
+                    }
                 )
             ]
 
