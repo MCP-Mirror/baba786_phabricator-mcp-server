@@ -1,2 +1,2 @@
 mcp>=0.1.0
-python-phabricator>=0.8.0
+phabricator>=0.8.0
