@@ -33,7 +33,7 @@ class MinimalMCPServer:
                     name="get-task",
                     description="Get details of a Phabricator task",
                     arguments=[
-                        types.Argument(
+                        types.PromptArgument(
                             name="task_id",
                             description="Task ID (without 'T' prefix)",
                             required=True
@@ -53,11 +53,11 @@ class MinimalMCPServer:
                     
                     # Format response
                     response = f"""Task T{task['id']}: {task['fields']['name']}
-                    Status: {task['fields']['status']['name']}
-                    Priority: {task['fields']['priority']['name']}
-                    
-                    Description:
-                    {task['fields']['description']['raw']}"""
+Status: {task['fields']['status']['name']}
+Priority: {task['fields']['priority']['name']}
+
+Description:
+{task['fields']['description']['raw']}"""
                     
                     return [types.TextContent(
                         type="text",
