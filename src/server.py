@@ -4,7 +4,7 @@ import mcp.server.stdio
 import mcp.types as types
 from phab_client import PhabricatorClient
 import os
-from typing import List
+from typing import List, Dict
 
 class PhabricatorMCPServer:
     def __init__(self):
