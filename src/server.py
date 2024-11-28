@@ -32,7 +32,7 @@ class PhabricatorMCPServer:
             ]
 
         @self.server.call_tool()
-        async def handle_call_tool(name: str, arguments: dict) -> List[types.Content]:
+        async def handle_call_tool(name: str, arguments: dict) -> List[types.TextContent]:
             try:
                 if name == "get-task":
                     task = await self.phab_client.get_task(arguments["task_id"])
