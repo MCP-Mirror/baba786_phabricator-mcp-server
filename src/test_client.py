@@ -8,7 +8,7 @@ async def main():
     server_params = StdioServerParameters(
         command="/opt/homebrew/bin/python3.11",
         args=["server.py"],
-        env={"PHABRICATOR_TOKEN": "your-token-here"}  # Replace with your token
+        env={"PHABRICATOR_TOKEN": "api-ojdk6nbvu35wh5g67l6nbxk3kmh7"}  # Replace with your token
     )
 
     async with stdio_client(server_params) as (read, write):

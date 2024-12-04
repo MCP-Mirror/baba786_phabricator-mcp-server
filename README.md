@@ -14,7 +14,7 @@ This project provides an MCP server that exposes Phabricator functionality throu
 ### Prerequisites
 
 - Python 3.8+
-- Phabricator API token
+- Phabricator API token (from your Phabricator instance)
 - Access to a Phabricator instance
 
 ### Installation
@@ -25,14 +25,47 @@ git clone https://github.com/baba786/phabricator-mcp-server.git
 cd phabricator-mcp-server
 ```
 
-2. Install dependencies:
+2. Create and activate a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Unix/MacOS
+# or
+.\venv\Scripts\activate  # On Windows
+```
+
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Set up your Phabricator API token:
+4. Set up your environment:
 ```bash
-export PHABRICATOR_TOKEN="your-token-here"
+# Copy the example env file
+cp .env.example .env
+
+# Edit .env and add your Phabricator token
+# Replace 'your-token-here' with your actual Phabricator API token
+echo "PHABRICATOR_TOKEN=your-token-here" > .env
+```
+
+5. Run the server:
+```bash
+cd src
+python server.py
+```
+
+## Usage
+
+Currently supported commands:
+- `get-task`: Retrieve details of a specific Phabricator task
+
+Example usage through the client:
+```python
+from src.mcp_minimal_client import Client
+
+client = Client()
+response = client.get_task(task_id="123")  # Replace with actual task ID
+print(response)
 ```
 
 ## Development Status
