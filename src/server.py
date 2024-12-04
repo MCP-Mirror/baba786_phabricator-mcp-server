@@ -4,7 +4,7 @@ import mcp.server.stdio
 import mcp.types as types
 from phab_client import PhabricatorClient
 import os
-from typing import List, Dict
+from typing import List, Dict, Any  # Added proper typing imports
 
 class PhabricatorMCPServer:
     def __init__(self):
@@ -51,7 +51,7 @@ class PhabricatorMCPServer:
                     text=f"Error: {str(e)}"
                 )]
 
-    def _format_task_details(self, task: Dict, comments: List[Dict]) -> str:
+    def _format_task_details(self, task: Dict[str, Any], comments: List[Dict[str, Any]]) -> str:
         """Format task details for display."""
         return f"""
 Task T{task['id']}: {task['fields']['name']}
@@ -65,7 +65,7 @@ Comments:
 {self._format_comments(comments)}
         """.strip()
 
-    def _format_comments(self, comments: List[Dict]) -> str:
+    def _format_comments(self, comments: List[Dict[str, Any]]) -> str:
         """Format task comments for display."""
         if not comments:
             return "No comments"
